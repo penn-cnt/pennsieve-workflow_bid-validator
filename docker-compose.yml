@@ -5,10 +5,10 @@ services:
   hackathon-python:
     env_file:
       - dev.env
-    image: hackathon/python
+    image: cnt/bidsvalidator
     volumes:
       - ./data:/service/data
-    container_name: hackathon-python
+    container_name: pennsieve-bidsvalidator
     build:
       context: .
       dockerfile: ./Dockerfile

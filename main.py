@@ -1,12 +1,16 @@
 #!/usr/bin/env python3.9
-
+import os
 import sys
 import shutil
-import os
+import datetime
 
-print("start of processing")
-src = os.environ['INPUT_DIR']
-dest = os.environ['OUTPUT_DIR']
+# Define import and export directories via environment variables (required by pennsieve as of 041924)
+src  = 'data/input/BIDS'
+dest = 'data/output/'
 
-shutil.copytree(src, dest, dirs_exist_ok=True)
-print("end of processing")
+# Get a date time for the report
+current_time = datetime.datetime.now()
+outfile      = f"bidsreport_{current_time.month:02d}{current_time.day:02d}{current_time.year:04d}_{current_time.hour:02d}{current_time.minute:02d}.report"
+
+# Run the command
+os.system(f"bids-validator {src} > {dest}/{outfile}")
